@@ -21,8 +21,8 @@ class MemcacheServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $isCacheDriver = $this->app['config']['cache.driver'] == 'memcache';
-        $servers = $this->app['config']['cache.memcached'];
+        $isCacheDriver = $this->app['config']['cache.default'] == 'memcache';
+        $servers = $this->app['config']['cache.stores.memcached.servers'];
         $prefix = $this->app['config']['cache.prefix'];
         $isSessionDriver = $this->app['config']['session.driver'] == 'memcache';
         $minutes = $this->app['config']['session.lifetime'];

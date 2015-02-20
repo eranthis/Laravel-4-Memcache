@@ -1,6 +1,7 @@
 <?php namespace Igormatkovic\Memcache;
 
 use Memcache;
+use RuntimeException;
 
 class MemcacheConnector {
 
@@ -10,7 +11,7 @@ class MemcacheConnector {
 	 * @param array  $servers
 	 * @return \Memcache
 	 *
-	 * @throws \RuntimeException
+	 * @throws RuntimeException
 	 */
 	public function connect(array $servers)
 	{
@@ -28,7 +29,7 @@ class MemcacheConnector {
 
 		if ($memcached->getVersion() === false)
 		{
-			throw new \RuntimeException("Could not establish Memcache connection.");
+			throw new RuntimeException("Could not establish Memcache connection.");
 		}
 
 		return $memcached;

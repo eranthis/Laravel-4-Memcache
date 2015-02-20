@@ -2,10 +2,10 @@
 
 use Memcache;
 
-use \Illuminate\Cache\StoreInterface;
+use \Illuminate\Contracts\Cache\Store;
 use \Illuminate\Cache\TaggableStore;
 
-class MemcacheStore extends TaggableStore implements StoreInterface {
+class MemcacheStore extends TaggableStore implements Store {
 
 	/**
 	 * The Memcached instance.
@@ -43,8 +43,8 @@ class MemcacheStore extends TaggableStore implements StoreInterface {
 	public function get($key)
 	{
 		if( $value = $this->memcache->get($this->prefix.$key) ) {
-            return $value;
-        }
+			return $value;
+		}
 	}
 
 	/**
@@ -100,11 +100,11 @@ class MemcacheStore extends TaggableStore implements StoreInterface {
 	 * Remove an item from the cache.
 	 *
 	 * @param  string  $key
-	 * @return void
+	 * @return bool
 	 */
 	public function forget($key)
 	{
-		$this->memcache->delete($this->prefix.$key);
+		return $this->memcache->delete($this->prefix.$key);
 	}
 
 	/**
